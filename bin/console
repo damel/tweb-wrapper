@@ -11,5 +11,7 @@ require "tweb_wrapper"
 # require "pry"
 # Pry.start
 
+client = TwebWrapper::Client.new
+
 require "irb"
 IRB.start(__FILE__)
