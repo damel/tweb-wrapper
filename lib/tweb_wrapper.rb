@@ -9,4 +9,5 @@ module TwebWrapper
   autoload :Resource, "tweb_wrapper/resource"
 
   autoload :AccountResource, "tweb_wrapper/resources/account"
+  autoload :DnsResource, "tweb_wrapper/resources/dns"
 end

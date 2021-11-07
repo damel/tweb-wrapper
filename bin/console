@@ -11,7 +11,7 @@ require "tweb_wrapper"
 # require "pry"
 # Pry.start
 
-client = TwebWrapper::Client.new
+client = TwebWrapper::Client.new(api_token: ENV["TIMEWEB_API_TOKEN"], username: ENV["TIMEWEB_USERNAME"])
 
 require "irb"
 IRB.start(__FILE__)

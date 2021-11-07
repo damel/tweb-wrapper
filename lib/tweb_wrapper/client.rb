@@ -1,27 +1,29 @@
 module TwebWrapper
   class Client
-    BASE_URL = "https://api.timeweb.ru/v1.2/"
+    attr_reader :api_token, :username
 
-    attr_reader :api_key, :api_token
-
-    def initialize(api_token: ENV["TIMEWEB_API_TOKEN"])
+    def initialize(api_token:, username:)
       @api_token = api_token
+      @username = username
     end
 
     def account = AccountResource.new(self)
-
-    def api_key   = ENV["TIMEWEB_API_KEY"]
-    def username  = ENV["TIMEWEB_USERNAME"]
+    def dns     = DnsResource.new(self)
 
     def connection
       @connection ||= Faraday.new do |conn|
-        conn.url_prefix = BASE_URL
+        conn.url_prefix = base_url
         conn.request :authorization, :Bearer, api_token
-
         conn.request :json
         conn.response :json, content_type: "application/json"
-        # conn.adapter Faraday.default_adapter
+        conn.adapter Faraday.default_adapter
       end
     end
+
+    def api_key = ENV["TIMEWEB_API_KEY"]
+
+    private
+
+    def base_url = "https://api.timeweb.ru/v1.2/accounts/#{username}/"
   end
 end
